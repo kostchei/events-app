@@ -11,7 +11,7 @@ function EventsApp() {
   const [terrains, setTerrains] = useState(['arctic', 'desert']); 
 
 
-const skillsByStat = skillsData.reduce((groups, skill) => {
+const skillsByStat = skills.reduce((groups, skill) => {
   const stat = skill.stat.toLowerCase();
   if (!groups[stat]) {
     groups[stat] = [];
