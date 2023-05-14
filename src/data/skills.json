@@ -1,0 +1,9 @@
+[
+    { "skill": "Athletics", "stat": "Strength" },
+    { "skill": "Arcana", "stat": "Intelligence" },
+    { "skill": "Perception", "stat": "Wisdom" },
+    { "skill": "Stealth", "stat": "Dexterity" },
+    { "skill": "Deception", "stat": "Charisma" }
+ 
+
+  ]

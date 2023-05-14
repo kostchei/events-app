@@ -1,0 +1,36 @@
+{
+    "gain": [
+      {
+        "name": "Health",
+        "description": "Gain a Healing dice or healing surge for every 2 levels (same as a short rest)"
+      },
+      {
+        "name": "Wealth",
+        "description": "Coin",
+        "tiers": [
+          { "tier": 1, "value": "50, 1d100" },
+          { "tier": 2, "value": "375, (2d100+25)x3" },
+          { "tier": 3, "value": "750, 2d6x100+50" },
+          { "tier": 4, "value": "7,500, 2d6x1000+500" },
+          { "tier": 5, "value": "75,000, 2d6x10000+5000" }
+        ]
+      }
+    ],
+    "loss": [
+      {
+        "name": "Health",
+        "description": "Take 1d10 damage or a healing dice for every 2 levels"
+      },
+      {
+        "name": "Wealth",
+        "description": "Lose a Pouch of coins or jewellery or damage to clothing or equipment worth",
+        "tiers": [
+          { "tier": 1, "value": "25 gp" },
+          { "tier": 2, "value": "100 gp" },
+          { "tier": 3, "value": "250 gp" },
+          { "tier": 4, "value": "2,500 gp" },
+          { "tier": 5, "value": "25,000 gp" }
+        ]
+      }
+    ]
+  }
