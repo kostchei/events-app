@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import skills from './data/skills.json';
 import resources from './data/resources.json';
 
@@ -67,9 +67,13 @@ const factionsByTerrain = {
   ]
 };
 
-function updateFactions(terrain) {
-  setFactions(factionsByTerrain[terrain] || []);
-}
+  // Update factions when terrain changes
+  useEffect(() => {
+    if (terrain && factionsByTerrain[terrain]) {
+      setFactions(factionsByTerrain[terrain]);
+      setSelectedFaction('');  // Reset selected faction
+    }
+  }, [terrain]);  // This will run whenever `terrain` changes
 
 const handleSubmit = (event) => {
   event.preventDefault();
@@ -129,18 +133,20 @@ return (
       </label>
 
       <label>
-        Terrain:
-        <select value={terrain} onChange={(e) => {setTerrain(e.target.value); updateFactions(e.target.value)}}>
-          {terrains.map((t) => <option key={t} value={t}>{t}</option>)}
-        </select>
-      </label>
+          Terrain:
+          <select value={terrain} onChange={(e) => setTerrain(e.target.value)}>
+            <option value=''>Select terrain</option>
+            {terrains.map(t => <option key={t} value={t}>{t}</option>)}
+          </select>
+        </label>
 
-      <label>
-        Faction:
-        <select value={selectedFaction} onChange={(e) => setSelectedFaction(e.target.value)}>
-          {factions.map((f) => <option key={f} value={f}>{f}</option>)}
-        </select>
-      </label>
+        <label>
+          Faction:
+          <select value={selectedFaction} onChange={(e) => setSelectedFaction(e.target.value)}>
+            <option value=''>Select faction</option>
+            {factions.map(f => <option key={f} value={f}>{f}</option>)}
+          </select>
+        </label>
 
       <button type="submit">Generate Event</button>
     </form>
