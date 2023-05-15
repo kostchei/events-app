@@ -97,6 +97,7 @@ const handleSubmit = (event) => {
 
     const randomGainResource = resources.gain[Math.floor(Math.random() * resources.gain.length)];
     const randomLossResource = resources.loss[Math.floor(Math.random() * resources.loss.length)];
+    const randomLossResource2 = resources.loss[Math.floor(Math.random() * resources.loss.length)];
 
     const gainResourceDescription = randomGainResource.tiers 
     ? `${randomGainResource.description} (${randomGainResource.tiers.find(tier => tier.tier === currentTier.tier).value})`
@@ -106,13 +107,17 @@ const handleSubmit = (event) => {
     ? `${randomLossResource.description} (${randomLossResource.tiers.find(tier => tier.tier === currentTier.tier).value})`
     : randomLossResource.description;
 
+    const lossResourceDescription2 = randomLossResource2.tiers 
+  ? randomLossResource2.tiers.find(tier => tier.tier === currentTier.tier).value
+  : randomLossResource2.description;
+
     let output;
     if (randomCheckType === "Simple Skill Check") {
       output = `Simple Skill Check DC ${dc} ${randomSkill.skill} (${randomSkill.stat}). On success you gain ${randomGainResource.name} (${gainResourceDescription}). On failure costs you ${randomLossResource.name} (${lossResourceDescription}).`;
     } else if (randomCheckType === "Resource Swap") {
-      output = `Resource Swap, on a Skill check DC ${dc - 3} ${randomSkill.skill} (${randomSkill.stat}). On success you gain ${randomGainResource.name} (${gainResourceDescription}) and costs ${randomLossResource.name} (${lossResourceDescription}). Failure costs an additional ${randomLossResource.name} (${lossResourceDescription}).`;
+      output = `Resource Swap, on a Skill check DC ${dc - 3} ${randomSkill.skill} (${randomSkill.stat}). On success you gain ${randomGainResource.name} (${gainResourceDescription}) and costs ${randomLossResource.name} (${lossResourceDescription}). Failure costs an additional ${randomLossResource2.name} (${lossResourceDescription2}).`;
     } else { // Skill Challenge
-      output = `Skill Challenge DC ${dc - 3} ${randomSkill.skill} (${randomSkill.stat}). Get party size x2 successes before party size failures. On success you gain ${randomGainResource.name} (${gainResourceDescription}). Failure costs an additional ${randomLossResource.name} (${lossResourceDescription}).`;
+      output = `Skill Challenge DC ${dc - 3} ${randomSkill.skill} (${randomSkill.stat}). Get party size x2 successes before party size failures. On success you gain ${randomGainResource.name} (${gainResourceDescription}). Failure costs an additional ${randomLossResource2.name} (${lossResourceDescription2}).`;
     }
 
     setOutput(output); // Set the output state variable
