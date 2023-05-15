@@ -79,8 +79,10 @@ function generateName(type) {
     } else if (type === "female") {
         nameFem();
     }
-
+    // Capitalize the first letter of the name before returning it
+    nMs = nMs.charAt(0).toUpperCase() + nMs.slice(1);
+    
     return nMs;
 }
 
-module.exports = generateName;
+export default generateName;
