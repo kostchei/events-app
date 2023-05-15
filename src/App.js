@@ -93,14 +93,26 @@ const handleSubmit = (event) => {
   ? randomLossResource2.tiers.find(tier => tier.tier === currentTier.tier).value
   : randomLossResource2.description;
 
-    let output;
-    if (randomCheckType === "Simple Skill Check") {
-      output = `Simple Skill Check DC ${dc} ${randomSkill.skill} (${randomSkill.stat}). On success you gain ${randomGainResource.name} (${gainResourceDescription}). On failure costs you ${randomLossResource.name} (${lossResourceDescription}).`;
-    } else if (randomCheckType === "Resource Swap") {
-      output = `Resource Swap, on a Skill check DC ${dc - 3} ${randomSkill.skill} (${randomSkill.stat}). On success you gain ${randomGainResource.name} (${gainResourceDescription}) and costs ${randomLossResource.name} (${lossResourceDescription}). Failure costs an additional ${randomLossResource2.name} (${lossResourceDescription2}).`;
-    } else { // Skill Challenge
-      output = `Skill Challenge DC ${dc - 3} ${randomSkill.skill} (${randomSkill.stat}). Get party size x2 successes before party size failures. On success you gain ${randomGainResource.name} (${gainResourceDescription}). Failure costs an additional ${randomLossResource2.name} (${lossResourceDescription2}).`;
-    }
+  let output;
+  if (randomCheckType === "Simple Skill Check") {
+    output = (
+      <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '80%'}}>
+        <strong>Simple Skill Check</strong> DC {dc} {randomSkill.skill} ({randomSkill.stat}). On success you gain {randomGainResource.name} ({gainResourceDescription}). On failure costs you {randomLossResource.name} ({lossResourceDescription}).
+      </div>
+    );
+  } else if (randomCheckType === "Resource Swap") {
+    output = (
+      <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '80%'}}>
+        <strong>Resource Swap</strong>, on a Skill check DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). On success you gain {randomGainResource.name} ({gainResourceDescription}) and costs {randomLossResource.name} ({lossResourceDescription}). Failure costs an additional {randomLossResource2.name} ({lossResourceDescription2}).
+      </div>
+    );
+  } else { // Skill Challenge
+    output = (
+      <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '80%'}}>
+        <strong>Skill Challenge</strong> DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). Get party size x2 successes before party size failures. On success you gain {randomGainResource.name} ({gainResourceDescription}). Failure costs an additional {randomLossResource2.name} ({lossResourceDescription2}).
+      </div>
+    );
+  }
 
     setOutput(output); // Set the output state variable
   }
