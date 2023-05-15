@@ -99,12 +99,12 @@ const handleSubmit = (event) => {
     const randomLossResource = resources.loss[Math.floor(Math.random() * resources.loss.length)];
 
     const gainResourceDescription = randomGainResource.tiers 
-      ? randomGainResource.tiers.find(tier => tier.tier === currentTier.tier).value
-      : randomGainResource.description;
+    ? `${randomGainResource.description} (${randomGainResource.tiers.find(tier => tier.tier === currentTier.tier).value})`
+    : randomGainResource.description;
 
     const lossResourceDescription = randomLossResource.tiers 
-      ? randomLossResource.tiers.find(tier => tier.tier === currentTier.tier).value
-      : randomLossResource.description;
+    ? `${randomLossResource.description} (${randomLossResource.tiers.find(tier => tier.tier === currentTier.tier).value})`
+    : randomLossResource.description;
 
     let output;
     if (randomCheckType === "Simple Skill Check") {

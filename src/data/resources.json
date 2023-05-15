@@ -5,14 +5,57 @@
         "description": "Gain a Healing dice or healing surge for every 2 levels (same as a short rest)"
       },
       {
+        "name": "Food",
+        "description": "Gain 2d6 + proficency bonus in pounds of food and gallons of water"
+      },
+      {
+        "name": "Revitalised",
+        "description": "Reduce exhaustion by one"
+      },
+      {
+        "name": "Godliness",
+        "description": "Improve Piety with a chosen God by one"
+      },
+      {
+        "name": "Cleansing",
+        "description": "Reduce corruption by one"
+      },
+      {
+        "name": "Hoard",
+        "description": "Next Encounter drops a Hoard"
+      },
+      {
+        "name": "Henching",
+        "description": "Recruit a hench-thing limited by charisma. Normal costs and generation method"
+      },
+      {
+        "name": "Factional Mission",
+        "description": "Gain access to a Factional Mission. Defeat the next 6 encounters with a long rest to gain profiecincy bonus Gain to Factional Reputation."
+      },
+      {
+        "name": "Downtime Opportunity",
+        "description": "Choice of downtime activities for 7 days, normal rules apply."
+      },
+      {
+        "name": "Mystical Empowerment",
+        "description": "Choose Spell of tier cast, class ability regained, or used free",
+        "tiers": [
+          { "tier": 1, "value": " Level 1 ability or spells(0+1) Mending, Good Berry, Cure Wounds, Identify" },
+          { "tier": 2, "value": " Level 5 ability or spells(2+3) Lesser Restoration, Healing Spirit, Aid, Continual Flame,  Remove Curse" },
+          { "tier": 3, "value": " Level 7 ability or spells(4) Fabricate, Cure Wounds (@lv 4), Secret Chest, Faithful Hound, Private Sanctum" },
+          { "tier": 4, "value": " Level 9 ability or spells(5) Awaken, Greater Restoration, Hallow, Legend Lore, Reincarnation, Seeming, Raise Dead, Planar Binding" },
+          { "tier": 5, "value": " Level 11 ability spells(6) Contingency, Create Homunculus, Create Undead, Forbiddance, Druid Grove, Instant Summons,  Disintegrate, Find the Path, Heroes Feast, Heal, Magic Jar" }
+        ]
+      },
+      {
         "name": "Wealth",
         "description": "Coin",
         "tiers": [
-          { "tier": 1, "value": "50, 1d100" },
-          { "tier": 2, "value": "375, (2d100+25)x3" },
-          { "tier": 3, "value": "750, 2d6x100+50" },
-          { "tier": 4, "value": "7,500, 2d6x1000+500" },
-          { "tier": 5, "value": "75,000, 2d6x10000+5000" }
+          { "tier": 1, "value": "500 or 1d100 x10 silver pieces" },
+          { "tier": 2, "value": "375 or (2d100+25)x3 gold pieces" },
+          { "tier": 3, "value": "750 or 2d6x100+50 gold pieces" },
+          { "tier": 4, "value": "7,500 or 2d6x1000+500 gold pieces" },
+          { "tier": 5, "value": "75,000 or 2d6x10000+5000 gold pieces" }
         ]
       }
     ],
@@ -20,6 +63,46 @@
       {
         "name": "Health",
         "description": "Take 1d10 damage or a healing dice for every 2 levels"
+      },
+      {
+        "name": "Reputation",
+        "description": "Lose one level of Factional Reputation"
+      },
+      {
+        "name": "Exhausted",
+        "description": "gain one level of exhaustion, from over exertion or exterme heat or cold"
+      },
+      {
+        "name": "Corruption",
+        "description": "Increase corruption by one"
+      },
+      {
+        "name": "Heresy",
+        "description": "Reduce Piety with a God which you have a positive Piety score by one"
+      },
+      {
+        "name": "Spent",
+        "description": "spell slot or rage or class ability used up"
+      },
+      {
+        "name": "Disease",
+        "description": "catch cackle fever, sewer plague or sight rot"
+      },
+      {
+        "name": "Poisoned",
+        "description": "Affected by Assassin's blood, taking 1d12 damage and having the poisoned condition for 24hrs"
+      },
+ 
+      {
+        "name": "Food",
+        "description": "Spoilt, lost or eaten by critters ",
+        "tiers": [
+          { "tier": 1, "value": "1d6 pounds of food or water" },
+          { "tier": 2, "value": "2d6 pounds of food or water" },
+          { "tier": 3, "value": "3d6 pounds of food or water" },
+          { "tier": 4, "value": "4d6 pounds of food or water" },
+          { "tier": 5, "value": "5d6 pounds of food or water" }
+        ]
       },
       {
         "name": "Wealth",

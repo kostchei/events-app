@@ -1,8 +1,23 @@
 [
     { "skill": "Athletics", "stat": "Strength" },
-    { "skill": "Arcana", "stat": "Intelligence" },
+    { "skill": "Knowledge Arcana", "stat": "Intelligence" },
+    { "skill": "Knowledge Nature", "stat": "Intelligence" },
+    { "skill": "Investigation", "stat": "Intelligence" },
+    { "skill": "Knowledge Religion", "stat": "Intelligence" },
+    { "skill": "a choice of crafting tools or kit", "stat": "Intelligence" },
+    { "skill": "Knowledge History", "stat": "Intelligence" },
+    { "skill": "a choice of gaming set or musical instrument", "stat": "Charisma" },
+    { "skill": "Animal Handling", "stat": "Wisdom" },
+    { "skill": "Insight", "stat": "Wisdom" },
+    { "skill": "Medicine", "stat": "Wisdom" },
+    { "skill": "Survival", "stat": "Wisdom" },
     { "skill": "Perception", "stat": "Wisdom" },
     { "skill": "Stealth", "stat": "Dexterity" },
+    { "skill": "Acrobatics", "stat": "Dexterity" },
+    { "skill": "Sleight of Hand", "stat": "Dexterity" },
+    { "skill": "Intimidation", "stat": "Charisma" },
+    { "skill": "Performance", "stat": "Charisma" },
+    { "skill": "Persuasion", "stat": "Charisma" },
     { "skill": "Deception", "stat": "Charisma" }
  
 
