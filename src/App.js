@@ -109,7 +109,7 @@ const handleSubmit = (event) => {
   } else { // Skill Challenge
     output = (
       <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '75%', textAlign: 'center'}}>
-        <strong>Skill Challenge</strong> DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). Get party size x2 successes before party size failures. On success you gain {randomGainResource.name} ({gainResourceDescription}). Failure costs an additional {randomLossResource2.name} ({lossResourceDescription2}).
+        <strong>Skill Challenge</strong> DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). Get party size x2 successes before party size failures. On success you gain {randomGainResource.name} ({gainResourceDescription}). Failure costs {randomLossResource.name} ({lossResourceDescription}).
       </div>
     );
   }
