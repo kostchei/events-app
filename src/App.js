@@ -8,7 +8,7 @@ function EventsApp() {
   const [terrain, setTerrain] = useState('');
   const [factions, setFactions] = useState([]);
   const [selectedFaction, setSelectedFaction] = useState('');
-  const [terrains, setTerrains] = useState(['arctic', 'desert']); 
+  const [terrains] = useState(['arctic', 'desert']);
 
 
 const skillsByStat = skills.reduce((groups, skill) => {
@@ -73,7 +73,7 @@ const factionsByTerrain = {
       setFactions(factionsByTerrain[terrain]);
       setSelectedFaction('');  // Reset selected faction
     }
-  }, [terrain]);  // This will run whenever `terrain` changes
+  }, [terrain, factionsByTerrain]);  // This will run whenever `t
 
 const handleSubmit = (event) => {
   event.preventDefault();
