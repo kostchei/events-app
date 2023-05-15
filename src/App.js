@@ -96,19 +96,19 @@ const handleSubmit = (event) => {
   let output;
   if (randomCheckType === "Simple Skill Check") {
     output = (
-      <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '80%'}}>
+      <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '80%', textAlign: 'center'}}>
         <strong>Simple Skill Check</strong> DC {dc} {randomSkill.skill} ({randomSkill.stat}). On success you gain {randomGainResource.name} ({gainResourceDescription}). On failure costs you {randomLossResource.name} ({lossResourceDescription}).
       </div>
     );
   } else if (randomCheckType === "Resource Swap") {
     output = (
-      <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '80%'}}>
+      <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '80%', textAlign: 'center'}}>
         <strong>Resource Swap</strong>, on a Skill check DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). On success you gain {randomGainResource.name} ({gainResourceDescription}) and costs {randomLossResource.name} ({lossResourceDescription}). Failure costs an additional {randomLossResource2.name} ({lossResourceDescription2}).
       </div>
     );
   } else { // Skill Challenge
     output = (
-      <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '80%'}}>
+      <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '75%', textAlign: 'center'}}>
         <strong>Skill Challenge</strong> DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). Get party size x2 successes before party size failures. On success you gain {randomGainResource.name} ({gainResourceDescription}). Failure costs an additional {randomLossResource2.name} ({lossResourceDescription2}).
       </div>
     );
@@ -122,10 +122,18 @@ const handleSubmit = (event) => {
 };
 
 return (
-  <div>
+  <div style={{    display: 'flex', 
+  flexDirection: 'column', 
+  alignItems: 'center', 
+  justifyContent: 'center', 
+  height: '50vh',
+  backgroundImage: `url("https://i.imgur.com/BaUKgO7.jpg")`,
+  backgroundPosition: 'top',
+  backgroundSize: '15%',
+  backgroundRepeat: 'no-repeat' }}>
     <h1>Events App</h1>
 
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}style={{ fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '80%' }}>
       <label>
         Level:
         <input type="number" value={level} onChange={(e) => setLevel(e.target.value)} min="1" max="20" />
