@@ -1,9 +1,4 @@
-/*
-to call this use
-const generateName = require('./assets/barbarianNames');
-
-console.log(generateName("male"));
-console.log(generateName("female"));  */
+/* https://www.fantasynamegenerators.com/goblin-names.php*/
 
 const nm1 = ["ae", "au", "ei", "a", "e", "i", "o", "u", "a", "e", "i", "o", "u", "a", "e", "i", "o", "u"];
 const nm2 = ["", "", "", "b", "bl", "br", "bh", "d", "dr", "dh", "f", "fr", "g", "gh", "gr", "gl", "h", "hy", "hr", "j", "k", "kh", "kr", "l", "ll", "m", "n", "p", "pr", "r", "rh", "s", "sk", "sg", "sm", "sn", "st", "t", "th", "thr", "ty", "v", "y"];
@@ -23,9 +18,9 @@ function generateName(type) {
         const rnd = Math.floor(Math.random() * nm2.length);
         const rnd2 = Math.floor(Math.random() * nm1.length);
         const rnd3 = Math.floor(Math.random() * nm4.length);
-        const rnd4 = Math.floor(Math.random() * nm1.length);
+        let rnd4 = Math.floor(Math.random() * nm1.length);
         const rnd5 = Math.floor(Math.random() * nm3.length);
-        const rnd6 = Math.floor(Math.random() * nm1.length);
+        let rnd6 = Math.floor(Math.random() * nm1.length);
         const rnd7 = Math.floor(Math.random() * nm3.length);
 
         if(rnd < 3) {
@@ -33,13 +28,13 @@ function generateName(type) {
                 rnd4 = Math.floor(Math.random() * nm1.length);
             }
         }
-
+    
         if(rnd < 3 || rnd4 < 3) {
             while(rnd6 < 3) {
                 rnd6 = Math.floor(Math.random() * nm1.length);
             }
         }
-
+    
         nMs = nm2[rnd] + nm1[rnd2] + nm3[rnd5] + nm1[rnd4] + nm3[rnd7] + nm1[rnd6] + nm4[rnd3];
     }
 
@@ -81,7 +76,7 @@ function generateName(type) {
     }
     // Capitalize the first letter of the name before returning it
     nMs = nMs.charAt(0).toUpperCase() + nMs.slice(1);
-    
+
     return nMs;
 }
 

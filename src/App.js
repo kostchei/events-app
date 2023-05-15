@@ -114,7 +114,7 @@ const handleSubmit = (event) => {
   } else { // Skill Challenge
     output = (
       <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '75%', textAlign: 'left'}}>
-       You meet {name}, {pronoun} is a member of the {selectedFaction}. <br /> You face a <strong>Skill Challenge</strong> DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). <br /> As a group you must achieve twice the numebr of successes as particpants, before you have failures equal to the number of participants. 
+       You meet {name}, {pronoun} is a member of the {selectedFaction}. <br /> You face a <strong>Skill Challenge</strong> DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). <br /> As a group you must achieve twice the number of successes as participants, before you have failures equal to the number of participants. 
        <br />  On success you gain {randomGainResource.name} ({gainResourceDescription}). Failure costs {randomLossResource.name} ({lossResourceDescription}).
       </div>
     );
