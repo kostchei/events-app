@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import skills from './data/skills.json';
 import resources from './data/resources.json';
 
@@ -44,28 +44,10 @@ const tiers = [
   { levelRange: [17, 20], dc: 21, tier: 5 },
 ];
 
-const factionsByTerrain = {
-  arctic: [
-    "Suloise",
-    "Frost + Snow Barbarians", 
-    "Megafauna",
-    "Magma Dwellers", 
-    "Pale Wyrms", 
-    "Goblinkin", 
-    "Frostmourne",
-    "Feyfrost",
-    "Hodir Ordning"
-  ],
-  desert: [
-    "Baklunish", 
-    "Rary-Bright Empire",
-    "Old Sulm", 
-    "Tribal",
-    "Azak-Zil Demihumans",
-    "Elemental Fire",
-    "Desert Fauna"
-  ]
-};
+const factionsByTerrain = useMemo(() => ({
+  arctic: ["Suloise", "Frost + Snow Barbarians", "Megafauna", "Magma Dwellers", "Pale Wyrms", "Goblinkin", "Frostmourne", "Feyfrost", "Hodir Ordning"],
+  desert: ["Baklunish", "Rary-Bright Empire", "Old Sulm", "Tribal", "Azak-Zil Demihumans", "Elemental Fire", "Desert Fauna"],
+}), []);
 
   // Update factions when terrain changes
   useEffect(() => {
