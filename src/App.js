@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import skills from './data/skills.json';
 import resources from './data/resources.json';
+import generateName from './assets/barbarianNames.js'; 
+
 
 function EventsApp() {
   const [level, setLevel] = useState(1);
@@ -9,7 +11,10 @@ function EventsApp() {
   const [factions, setFactions] = useState([]);
   const [selectedFaction, setSelectedFaction] = useState('');
   const [terrains] = useState(['arctic', 'desert']);
-
+  const isMale = Math.random() < 0.55;
+  const gender = isMale ? 'male' : 'female';
+  const pronoun = isMale ? 'he' : 'she';
+  const name = generateName(gender);
 
 const skillsByStat = skills.reduce((groups, skill) => {
   const stat = skill.stat.toLowerCase();
@@ -97,19 +102,19 @@ const handleSubmit = (event) => {
   if (randomCheckType === "Simple Skill Check") {
     output = (
       <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '75%', textAlign: 'center'}}>
-        <strong>Simple Skill Check</strong> DC {dc} {randomSkill.skill} ({randomSkill.stat}). On success you gain {randomGainResource.name} ({gainResourceDescription}). On failure costs you {randomLossResource.name} ({lossResourceDescription}).
+       You meet {name}, {pronoun} is a member of the {selectedFaction} <strong>Simple Skill Check</strong> DC {dc} {randomSkill.skill} ({randomSkill.stat}). On success you gain {randomGainResource.name} ({gainResourceDescription}). On failure costs you {randomLossResource.name} ({lossResourceDescription}).
       </div>
     );
   } else if (randomCheckType === "Resource Swap") {
     output = (
       <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '75%', textAlign: 'center'}}>
-        <strong>Resource Swap</strong>, on a Skill check DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). On success you gain {randomGainResource.name} ({gainResourceDescription}) and costs {randomLossResource.name} ({lossResourceDescription}). Failure costs an additional {randomLossResource2.name} ({lossResourceDescription2}).
+        You meet {name}, {pronoun} is a member of the {selectedFaction}<strong>Resource Swap</strong>, on a Skill check DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). On success you gain {randomGainResource.name} ({gainResourceDescription}) and costs {randomLossResource.name} ({lossResourceDescription}). Failure costs an additional {randomLossResource2.name} ({lossResourceDescription2}).
       </div>
     );
   } else { // Skill Challenge
     output = (
       <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '75%', textAlign: 'center'}}>
-        <strong>Skill Challenge</strong> DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). Get party size x2 successes before party size failures. On success you gain {randomGainResource.name} ({gainResourceDescription}). Failure costs {randomLossResource.name} ({lossResourceDescription}).
+       You meet {name}, {pronoun} is a member of the {selectedFaction} <strong>Skill Challenge</strong> DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). Get party size x2 successes before party size failures. On success you gain {randomGainResource.name} ({gainResourceDescription}). Failure costs {randomLossResource.name} ({lossResourceDescription}).
       </div>
     );
   }
