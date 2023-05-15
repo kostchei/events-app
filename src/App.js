@@ -108,11 +108,11 @@ const handleSubmit = (event) => {
 
     let output;
     if (randomCheckType === "Simple Skill Check") {
-      output = `Simple Skill Check DC ${dc} ${randomSkill.skill} (${randomSkill.stat}). On success you gain ${randomGainResource.name} (${gainResourceDescription}). On failure you lose ${randomLossResource.name} (${lossResourceDescription}).`;
+      output = `Simple Skill Check DC ${dc} ${randomSkill.skill} (${randomSkill.stat}). On success you gain ${randomGainResource.name} (${gainResourceDescription}). On failure costs you ${randomLossResource.name} (${lossResourceDescription}).`;
     } else if (randomCheckType === "Resource Swap") {
-      output = `Resource Swap, on a Skill check DC ${dc - 3} ${randomSkill.skill} (${randomSkill.stat}). On success you gain ${randomGainResource.name} (${gainResourceDescription}) and lose ${randomLossResource.name} (${lossResourceDescription}). On a failure you lose an additional ${randomLossResource.name} (${lossResourceDescription}).`;
+      output = `Resource Swap, on a Skill check DC ${dc - 3} ${randomSkill.skill} (${randomSkill.stat}). On success you gain ${randomGainResource.name} (${gainResourceDescription}) and costs ${randomLossResource.name} (${lossResourceDescription}). Failure costs an additional ${randomLossResource.name} (${lossResourceDescription}).`;
     } else { // Skill Challenge
-      output = `Skill Challenge DC ${dc - 3} ${randomSkill.skill} (${randomSkill.stat}). Get party size x2 successes before party size failures. On success you gain ${randomGainResource.name} (${gainResourceDescription}). On failure you lose ${randomLossResource.name} (${lossResourceDescription}).`;
+      output = `Skill Challenge DC ${dc - 3} ${randomSkill.skill} (${randomSkill.stat}). Get party size x2 successes before party size failures. On success you gain ${randomGainResource.name} (${gainResourceDescription}). Failure costs an additional ${randomLossResource.name} (${lossResourceDescription}).`;
     }
 
     setOutput(output); // Set the output state variable
