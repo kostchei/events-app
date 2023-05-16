@@ -79,7 +79,7 @@
         ]
       },
       {
-        "name": "Reputation, ",
+        "name": "loss of Reputation, ",
         "description": "lose one level of Factional Reputation"
       },
       {
@@ -91,7 +91,7 @@
         "description": "increase your corruption by one"
       },
       {
-        "name": "divine retribution.",
+        "name": "loss of Piety",
         "description": "Reduce Piety with a God which you have a positive Piety score by one"
       },
       {

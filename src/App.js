@@ -136,7 +136,7 @@ const handleSubmit = (event) => {
       <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '75%', textAlign: 'left'}}>
         Near {wildFeature.name} you meet {name}, {pronoun} is {tierTitle} {faction}. 
         <br /> You strike a  bargain for a <strong>Resource Swap</strong>, make a Skill check DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). 
-        <br />Success provides {randomGainResource.name} {gainResourceDescription} and costs {randomLossResource.name} {lossResourceDescription}. On failure you suffer an additional {randomLossResource2.name} ({lossResourceDescription2}).
+        <br />Success provides {randomGainResource.name} {gainResourceDescription} and costs {randomLossResource.name} {lossResourceDescription}. On failure you suffer an additional {randomLossResource2.name} {lossResourceDescription2}.
         <br/>Success grants each participant {successExp} experience points, failure gives {failureExp} experience points.
       </div>
     );
