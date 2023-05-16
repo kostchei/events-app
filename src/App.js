@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import skills from './data/skills.json';
 import resources from './data/resources.json';
 import generateName from './assets/barbarianNames.js'; 
+import wildFeatures from './data/wildFeatures.json';
 
 
 function EventsApp() {
@@ -49,7 +50,8 @@ const tiers = [
   { levelRange: [17, 20], dc: 21, tier: 5, xp: 2000, title: "the most epic of the" },
 ];
 
-
+const randomWildFeatureIndex = Math.floor(Math.random() * wildFeatures.wildFeature.length);
+const wildFeature = wildFeatures.wildFeature[randomWildFeatureIndex];
 
 const factionsByTerrain = useMemo(() => ({
   arctic: ["Suloise", "Northern Barbarians", "Wildthings", "Magma Dwellers", "Pale Wyrms", "Goblinkin", "Frostmourne", "Feyfrost", "Hodir Ordning"],
@@ -123,7 +125,7 @@ const handleSubmit = (event) => {
   if (randomCheckType === "Simple Skill Check") {
     output = (
       <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '75%', textAlign: 'left'}}>
-       You meet {name}, {pronoun} is {tierTitle} {faction}. 
+       Near {wildFeature.name} meet {name}, {pronoun} is {tierTitle} {faction}. 
        <br /> Make a <strong>Simple Skill Check</strong> DC {dc} {randomSkill.skill} ({randomSkill.stat}). Success provides {randomGainResource.name} {gainResourceDescription}. 
        <br />On failure you suffer {randomLossResource.name} {lossResourceDescription}.
        <br/> Success grants each participant {successExp} experience points, failure gives {failureExp} experience points.
@@ -132,7 +134,7 @@ const handleSubmit = (event) => {
   } else if (randomCheckType === "Resource Swap") {
     output = (
       <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '75%', textAlign: 'left'}}>
-        You meet {name}, {pronoun} is {tierTitle} {faction}. 
+        Near {wildFeature.name} meet {name}, {pronoun} is {tierTitle} {faction}. 
         <br /> You strike a  bargain for a <strong>Resource Swap</strong>, make a Skill check DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). 
         <br />Success provides {randomGainResource.name} {gainResourceDescription} and costs {randomLossResource.name} {lossResourceDescription}. On failure you suffer an additional {randomLossResource2.name} ({lossResourceDescription2}).
         <br/>Success grants each participant {successExp} experience points, failure gives {failureExp} experience points.
@@ -141,7 +143,7 @@ const handleSubmit = (event) => {
   } else { // Skill Challenge
     output = (
       <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '75%', textAlign: 'left'}}>
-       You meet {name}, {pronoun} is {tierTitle} {faction}. <br /> You face a <strong>Skill Challenge</strong> DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). <br /> As a group you must achieve twice the number of successes as participants, before you have failures equal to the number of participants. 
+       Near {wildFeature.name} meet {name}, {pronoun} is {tierTitle} {faction}. <br /> You face a <strong>Skill Challenge</strong> DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). <br /> As a group you must achieve twice the number of successes as participants, before you have failures equal to the number of participants. 
        <br />  Success provides {randomGainResource.name} {gainResourceDescription}. On failure you suffer {randomLossResource.name} {lossResourceDescription}.
        <br/>Success grants each participant {successExp} experience points, failure gives {failureExp} experience points.
       </div>
