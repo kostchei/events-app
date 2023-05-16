@@ -77,15 +77,15 @@
         "description": "increase your corruption by one"
       },
       {
-        "name": "are punished by a god.",
+        "name": "divine retribution.",
         "description": "Reduce Piety with a God which you have a positive Piety score by one"
       },
       {
-        "name": "Spent",
+        "name": "power spent",
         "description": "spell slot or rage or class ability used up"
       },
       {
-        "name": "Disease",
+        "name": "catching a Disease",
         "description": "catch cackle fever, sewer plague or sight rot"
       },
       {
