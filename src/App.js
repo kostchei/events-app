@@ -42,17 +42,17 @@ for (const [stat, weight] of Object.entries(statWeights)) {
 }
 
 const tiers = [
-  { levelRange: [1, 4], dc: 14, tier: 1, xp: 25},
-  { levelRange: [5, 8], dc: 16, tier: 2, xp:250 },
-  { levelRange: [9, 12], dc: 18, tier: 3 , xp: 550 },
-  { levelRange: [13, 16], dc: 20, tier: 4, xp: 1100 },
-  { levelRange: [17, 20], dc: 21, tier: 5, xp: 2000 },
+  { levelRange: [1, 4], dc: 14, tier: 1, xp: 25, title: "the least of" },
+  { levelRange: [5, 8], dc: 16, tier: 2, xp:250, title: "a worthy of the" },
+  { levelRange: [9, 12], dc: 18, tier: 3 , xp: 550, title: " a leader among the" },
+  { levelRange: [13, 16], dc: 20, tier: 4, xp: 1100, title: " a paragon of the" },
+  { levelRange: [17, 20], dc: 21, tier: 5, xp: 2000, title: "the most epic of the" },
 ];
 
 
 
 const factionsByTerrain = useMemo(() => ({
-  arctic: ["Suloise", "Frost + Snow Barbarians", "Megafauna", "Magma Dwellers", "Pale Wyrms", "Goblinkin", "Frostmourne", "Feyfrost", "Hodir Ordning"],
+  arctic: ["Suloise", "Northern Barbarians", "Wildthings", "Magma Dwellers", "Pale Wyrms", "Goblinkin", "Frostmourne", "Feyfrost", "Hodir Ordning"],
   desert: ["Baklunish", "Rary-Bright Empire", "Old Sulm", "Tribal", "Azak-Zil Demihumans", "Elemental Fire", "Desert Fauna"],
 }), []);
 
@@ -71,6 +71,7 @@ const handleSubmit = (event) => {
   const currentTier = tiers.find(tier => level >= tier.levelRange[0] && level <= tier.levelRange[1]);
   const dc = currentTier.dc;
   const xp = currentTier.xp;
+  const tierTitle = currentTier.title;
 
   // Define generateEvent here
   function generateEvent() {
@@ -109,7 +110,7 @@ const handleSubmit = (event) => {
   if (randomCheckType === "Simple Skill Check") {
     output = (
       <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '75%', textAlign: 'left'}}>
-       You meet {name}, {pronoun} is a member of the {selectedFaction}. 
+       You meet {name}, {pronoun} is {tierTitle} {selectedFaction}. 
        <br /> Make a <strong>Simple Skill Check</strong> DC {dc} {randomSkill.skill} ({randomSkill.stat}). Success provides {randomGainResource.name} {gainResourceDescription}. 
        <br />On failure you suffer {randomLossResource.name} {lossResourceDescription}.
        <br/> Success grants each participant {successExp} experience points, failure gives {failureExp} experience points.
@@ -118,7 +119,7 @@ const handleSubmit = (event) => {
   } else if (randomCheckType === "Resource Swap") {
     output = (
       <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '75%', textAlign: 'left'}}>
-        You meet {name}, {pronoun} is a member of the {selectedFaction}. 
+        You meet {name}, {pronoun} is {tierTitle} {selectedFaction}. 
         <br /> You strike a  bargain for a <strong>Resource Swap</strong>, make a Skill check DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). 
         <br />Success provides {randomGainResource.name} {gainResourceDescription} and costs {randomLossResource.name} {lossResourceDescription}. On failure you suffer an additional {randomLossResource2.name} ({lossResourceDescription2}).
         <br/>Success grants each participant {successExp} experience points, failure gives {failureExp} experience points.
@@ -127,7 +128,7 @@ const handleSubmit = (event) => {
   } else { // Skill Challenge
     output = (
       <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '75%', textAlign: 'left'}}>
-       You meet {name}, {pronoun} is a member of the {selectedFaction}. <br /> You face a <strong>Skill Challenge</strong> DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). <br /> As a group you must achieve twice the number of successes as participants, before you have failures equal to the number of participants. 
+       You meet {name}, {pronoun} is {tierTitle} {selectedFaction}. <br /> You face a <strong>Skill Challenge</strong> DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). <br /> As a group you must achieve twice the number of successes as participants, before you have failures equal to the number of participants. 
        <br />  Success provides {randomGainResource.name} {gainResourceDescription}. On failure you suffer {randomLossResource.name} {lossResourceDescription}.
        <br/>Success grants each participant {successExp} experience points, failure gives {failureExp} experience points.
       </div>
