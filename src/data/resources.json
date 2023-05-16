@@ -2,7 +2,14 @@
     "gain": [
       {
         "name": "Health,",
-        "description": "gain a Healing dice or healing surge for every 2 levels (same as a short rest)"
+        "description": "regain", 
+        "tiers": [
+          { "tier": 1, "value": "1 hit dice healing " },
+          { "tier": 2, "value": "2 hit dice healing" },
+          { "tier": 3, "value": "4  hit dice healing" },
+          { "tier": 4, "value": "6 hit dice healing" },
+          { "tier": 5, "value": "8 hit dice healing" }
+        ]
       },
       {
         "name": "Food,",
@@ -49,7 +56,7 @@
       },
       {
         "name": "Wealth",
-        "description": "Coin or other portable wealth to the vlaue of",
+        "description": "Coin or other portable wealth to the value of",
         "tiers": [
           { "tier": 1, "value": "500 or 1d100 x10 silver pieces" },
           { "tier": 2, "value": "375 or (2d100+25)x3 gold pieces" },
@@ -62,7 +69,14 @@
     "loss": [
       {
         "name": "Health,",
-        "description": "take 1d10 damage or a healing dice for every 2 levels"
+        "description": "take",
+        "tiers": [
+          { "tier": 1, "value": "1d10 hit points damage" },
+          { "tier": 2, "value": "2d10 hit points damages" },
+          { "tier": 3, "value": "4d10 hit points damage" },
+          { "tier": 4, "value": "10d10 hit points damage" },
+          { "tier": 5, "value": "18d10 hit points damage" }
+        ]
       },
       {
         "name": "Reputation, ",
