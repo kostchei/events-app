@@ -26,11 +26,11 @@
       },
       {
         "name": "opportunity for Henching",
-        "description": "Recruit a hench-thing limited by charisma. Normal costs and generation method"
+        "description": "Recruit a hench-thing from this faction, limited by charisma. Normal costs and generation method"
       },
       {
         "name": "a Factional Mission",
-        "description": "Gain access to a Factional Mission. Defeat the next 6 encounters with a long rest and be rewarded with proficency bonus to Factional Reputation."
+        "description": "Gain access to a important Mission for this Faction. Defeat the next 6 encounters with a long rest and be rewarded with proficency bonus to this Faction's Reputation."
       },
       {
         "name": "a Downtime Opportunity",
