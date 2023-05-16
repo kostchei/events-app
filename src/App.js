@@ -7,7 +7,7 @@ import generateName from './assets/barbarianNames.js';
 function EventsApp() {
   const [level, setLevel] = useState(1);
   const [output, setOutput] = useState("");
-  const [terrain, setTerrain] = useState('');
+  const [terrain, setTerrain] = useState('arctic');
   const [factions, setFactions] = useState([]);
   const [selectedFaction, setSelectedFaction] = useState('');
   const [terrains] = useState(['arctic', 'desert']);
