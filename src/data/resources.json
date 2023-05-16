@@ -9,8 +9,8 @@
         "description": "Gain 2d6 + proficency bonus in pounds of food and gallons of water"
       },
       {
-        "name": "Revitalised",
-        "description": "Reduce exhaustion by one"
+        "name": "Revitalised,",
+        "description": "reduce your exhaustion by one"
       },
       {
         "name": "Godliness",
@@ -21,19 +21,19 @@
         "description": "Reduce corruption by one"
       },
       {
-        "name": "Hoard",
+        "name": "directions to a Hoard",
         "description": "Next Encounter drops a Hoard"
       },
       {
-        "name": "Henching",
+        "name": "opportunity for Henching",
         "description": "Recruit a hench-thing limited by charisma. Normal costs and generation method"
       },
       {
-        "name": "Factional Mission",
+        "name": "a Factional Mission",
         "description": "Gain access to a Factional Mission. Defeat the next 6 encounters with a long rest and be rewarded with proficency bonus to Factional Reputation."
       },
       {
-        "name": "Downtime Opportunity",
+        "name": "a Downtime Opportunity",
         "description": "Choice of downtime activities for 7 days, normal rules apply."
       },
       {
@@ -49,7 +49,7 @@
       },
       {
         "name": "Wealth",
-        "description": "Coin",
+        "description": "Coin or other portable wealth to the vlaue of",
         "tiers": [
           { "tier": 1, "value": "500 or 1d100 x10 silver pieces" },
           { "tier": 2, "value": "375 or (2d100+25)x3 gold pieces" },
@@ -61,23 +61,23 @@
     ],
     "loss": [
       {
-        "name": "Health",
-        "description": "Take 1d10 damage or a healing dice for every 2 levels"
+        "name": "Health,",
+        "description": "take 1d10 damage or a healing dice for every 2 levels"
       },
       {
-        "name": "Reputation",
-        "description": "Lose one level of Factional Reputation"
+        "name": "Reputation, ",
+        "description": "lose one level of Factional Reputation"
       },
       {
-        "name": "Exhausted",
+        "name": "Exhausted,",
         "description": "gain one level of exhaustion, from over exertion or extereme heat or cold"
       },
       {
-        "name": "Corruption",
-        "description": "Increase corruption by one"
+        "name": "Corruption,",
+        "description": "increase your corruption by one"
       },
       {
-        "name": "Heresy",
+        "name": "are punished by a god.",
         "description": "Reduce Piety with a God which you have a positive Piety score by one"
       },
       {
@@ -95,7 +95,7 @@
  
       {
         "name": "Food",
-        "description": "Spoilt, lost or eaten by critters ",
+        "description": "spoilt, lost or eaten by critters ",
         "tiers": [
           { "tier": 1, "value": "1d6 pounds of food or water" },
           { "tier": 2, "value": "2d6 pounds of food or water" },
@@ -105,8 +105,8 @@
         ]
       },
       {
-        "name": "Wealth",
-        "description": "Lose a Pouch of coins or jewellery or damage to clothing or equipment worth",
+        "name": "loss of Wealth,",
+        "description": "lose a Pouch of coins or jewellery or damage to clothing or equipment worth to a value of",
         "tiers": [
           { "tier": 1, "value": "25 gp" },
           { "tier": 2, "value": "100 gp" },
