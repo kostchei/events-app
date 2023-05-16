@@ -1,40 +1,40 @@
 {
     "gain": [
       {
-        "name": "Health",
-        "description": "Gain a Healing dice or healing surge for every 2 levels (same as a short rest)"
+        "name": "Health,",
+        "description": "gain a Healing dice or healing surge for every 2 levels (same as a short rest)"
       },
       {
-        "name": "Food",
-        "description": "Gain 2d6 + proficency bonus in pounds of food and gallons of water"
+        "name": "Food,",
+        "description": "gain 2d6 + proficency bonus in pounds of food and gallons of water"
       },
       {
         "name": "Revitalised,",
         "description": "reduce your exhaustion by one"
       },
       {
-        "name": "Godliness",
-        "description": "Improve Piety with a chosen God by one"
+        "name": "Godliness,",
+        "description": "improve Piety with a chosen God by one"
       },
       {
-        "name": "Cleansing",
-        "description": "Reduce corruption by one"
+        "name": "Cleansing, ",
+        "description": "reduce corruption by one"
       },
       {
-        "name": "directions to a Hoard",
+        "name": "directions to a Hoard!",
         "description": "Next Encounter drops a Hoard"
       },
       {
-        "name": "opportunity for Henching",
+        "name": "opportunity for Henching.",
         "description": "Recruit a hench-thing from this faction, limited by charisma. Normal costs and generation method"
       },
       {
-        "name": "a Factional Mission",
+        "name": "a Factional Mission.",
         "description": "Gain access to a important Mission for this Faction. Defeat the next 6 encounters with a long rest and be rewarded with proficency bonus to this Faction's Reputation."
       },
       {
         "name": "a Downtime Opportunity",
-        "description": "Choice of downtime activities for 7 days, normal rules apply."
+        "description": "Choose a downtime activity for 7 days, normal rules apply."
       },
       {
         "name": "Mystical Empowerment",
@@ -89,8 +89,8 @@
         "description": "catch cackle fever, sewer plague or sight rot"
       },
       {
-        "name": "Poisoned",
-        "description": "Affected by Assassin's blood, taking 1d12 damage and having the poisoned condition for 24hrs"
+        "name": "Poisoning",
+        "description": ", affected by Assassin's blood, taking 1d12 damage and having the poisoned condition for 24hrs"
       },
  
       {
