@@ -67,12 +67,25 @@ const factionsByTerrain = useMemo(() => ({
 const handleSubmit = (event) => {
   event.preventDefault();
 
+ // Add level variation
+ let variedLevel = parseInt(level) + Math.floor(Math.random() * 9) - 4;  // Random number between -4 and +4
+ // Ensure variedLevel is within 1-20 range
+ variedLevel = Math.max(1, variedLevel);
+ variedLevel = Math.min(20, variedLevel);
+
   // Calculate tier and DC here
   const currentTier = tiers.find(tier => level >= tier.levelRange[0] && level <= tier.levelRange[1]);
   const dc = currentTier.dc;
   const xp = currentTier.xp;
   const tierTitle = currentTier.title;
 
+    // Randomize faction selection 10% of the time
+    let faction = selectedFaction;
+    if (Math.random() < 0.1) {
+      const randomFactionIndex = Math.floor(Math.random() * factions.length);
+      faction = factions[randomFactionIndex];
+    }  
+  
   // Define generateEvent here
   function generateEvent() {
     const randomStatIndex = Math.floor(Math.random() * weightedStatList.length);
