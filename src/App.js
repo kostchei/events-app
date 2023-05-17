@@ -3,6 +3,7 @@ import skills from './data/skills.json';
 import resources from './data/resources.json';
 import generateName from './assets/barbarianNames.js'; 
 import wildFeatures from './data/wildFeatures.json';
+import './App.css'; 
 
 
 function EventsApp() {
@@ -163,13 +164,13 @@ return (
   alignItems: 'center', 
   justifyContent: 'center', 
   height: '60vh',
-  backgroundImage: `url("https://i.imgur.com/BaUKgO7.jpg")`,
+  backgroundImage: `url("https://i.imgur.com/Y4x7nJ8.jpg")`,
   backgroundPosition: 'top',
-  backgroundSize: '15%',
+  backgroundSize: '50%',
   backgroundRepeat: 'no-repeat' }}>
     <h1>Events App</h1>
 
-    <form onSubmit={handleSubmit}style={{ fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '75%' }}>
+    <form onSubmit={handleSubmit}style={{ fontFamily: 'Merriweather, serif', margin: '0 auto', width: '75%' }}>
       <label>
         Level:
         <input type="number" value={level} onChange={(e) => setLevel(e.target.value)} min="1" max="20" />
