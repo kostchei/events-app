@@ -125,7 +125,7 @@ const handleSubmit = (event) => {
   let output;
   if (randomCheckType === "Simple Skill Check") {
     output = (
-      <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '75%', textAlign: 'left'}}>
+      <div style={{fontFamily: 'Merriweather, serif', margin: '0 auto', width: '75%', textAlign: 'left'}}>
        Near {wildFeature.name} you meet {name}, {pronoun} is {tierTitle} {faction}. 
        <br /> Make a <strong>Simple Skill Check</strong> DC {dc} {randomSkill.skill} ({randomSkill.stat}). Success provides {randomGainResource.name} {gainResourceDescription}. 
        <br />On failure you suffer {randomLossResource.name} {lossResourceDescription}.
@@ -134,7 +134,7 @@ const handleSubmit = (event) => {
     );
   } else if (randomCheckType === "Resource Swap") {
     output = (
-      <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '75%', textAlign: 'left'}}>
+      <div style={{fontFamily: 'Merriweather, serif', margin: '0 auto', width: '75%', textAlign: 'left'}}>
         Near {wildFeature.name} you meet {name}, {pronoun} is {tierTitle} {faction}. 
         <br /> You strike a  bargain for a <strong>Resource Swap</strong>, make a Skill check DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). 
         <br />Success provides {randomGainResource.name} {gainResourceDescription} and costs {randomLossResource.name} {lossResourceDescription}. On failure you suffer an additional {randomLossResource2.name} {lossResourceDescription2}.
@@ -143,7 +143,7 @@ const handleSubmit = (event) => {
     );
   } else { // Skill Challenge
     output = (
-      <div style={{fontFamily: 'Helvetica Neue, Arial, sans-serif', margin: '0 auto', width: '75%', textAlign: 'left'}}>
+      <div style={{fontFamily: 'Merriweather, serif', margin: '0 auto', width: '75%', textAlign: 'left'}}>
        Near {wildFeature.name} you meet {name}, {pronoun} is {tierTitle} {faction}. <br /> You face a <strong>Skill Challenge</strong> DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}). <br /> As a group you must achieve twice the number of successes as participants, before you have failures equal to the number of participants. 
        <br />  Success provides {randomGainResource.name} {gainResourceDescription}. On failure you suffer {randomLossResource.name} {lossResourceDescription}.
        <br/>Success grants each participant {successExp} experience points, failure gives {failureExp} experience points.
@@ -164,7 +164,7 @@ return (
   alignItems: 'center', 
   justifyContent: 'center', 
   height: '60vh',
-  backgroundImage: `url("https://i.imgur.com/Y4x7nJ8.jpg")`,
+  backgroundImage: `url("https://i.imgur.com/GPvqUjn.jpg")`,
   backgroundPosition: 'top',
   backgroundSize: '50%',
   backgroundRepeat: 'no-repeat' }}>
