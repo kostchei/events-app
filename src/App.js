@@ -168,7 +168,7 @@ return (
   backgroundPosition: 'top',
   backgroundSize: '50%',
   backgroundRepeat: 'no-repeat' }}>
-    <h1>D& 5th Edition Skill Events Generator</h1>
+    <h1>D&D Skill Events</h1>
 
     <form onSubmit={handleSubmit}style={{ fontFamily: 'Merriweather, serif', margin: '0 auto', width: '75%' }}>
       <label>
