@@ -1,11 +1,8 @@
-# Objectives
+# To Do
 
-Make skill challenges and checks
+## Clean up NPC output
 
-Generate Random NPCS
-
-Things to Add
-
+perhaps pick 1 relevant
 
 ## Split functions
 
