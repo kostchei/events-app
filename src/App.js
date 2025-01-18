@@ -15,6 +15,7 @@ import tarotJSON from './data/tarot.json';
 // --- Name generator imports ---
 import barbarianNames from './assets/barbarianNames.js';
 import aquilonianNames from './assets/aquilonianNames.js';
+import orientalNames from './assets/orientalNames.js';
 
 function App() {
   /******************************************************
@@ -32,7 +33,7 @@ function App() {
     "Tengri",
     "Cathay",
     "Nihon",
-    "Carrramoor",
+    "Carramoor",
     "Lusitania",
     "Kurzil",
     "Q'haran",
@@ -50,7 +51,11 @@ function App() {
       case "Aquilonia":
         return aquilonianNames(gender);
       case "Tengri":
-        return barbarianNames(gender); // or some other specialized generator if you prefer
+        return barbarianNames(gender);
+      case "Cathay":
+        return orientalNames(gender); // Use oriental names for Cathay
+      case "Nihon":
+        return orientalNames(gender); // Use oriental names for Nihon
       default:
         // fallback to barbarian names for everything else
         return barbarianNames(gender);
