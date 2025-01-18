@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 // JSON data (replace with correct paths)
@@ -20,10 +20,27 @@ function App() {
    ******************************************************/
   const [level, setLevel] = useState(1);
   const [output, setOutput] = useState("");
-  const [terrain, setTerrain] = useState('arctic');
-  const [factions, setFactions] = useState([]);
-  const [selectedFaction, setSelectedFaction] = useState('');
-  const [terrains] = useState(['arctic', 'desert']);
+
+  // ---------- New Homeland State ------------
+  // First dropdown: user can choose "random" or pick from the list below
+  const homelandOptions = [
+    "random",
+    "Aquilonia",
+    "Skeldir",
+    "Tengri",
+    "Cathay",
+    "Nihon",
+    "Carrramoor",
+    "Lusitania",
+    "Kurzil",
+    "Q'haran",
+  ];
+  const [homeland, setHomeland] = useState("random");
+
+  // ---------- New Arc State ------------
+  // Second dropdown: user can choose "random" or pick from these arcs
+  const arcOptions = ["random", "Lolth", "Bloodwar", "Vecna"];
+  const [arc, setArc] = useState("random");
 
   // Barbarian name snippet
   const isMale = Math.random() < 0.55;
@@ -43,6 +60,7 @@ function App() {
     return groups;
   }, {});
 
+  // Weighted Stats
   const statWeights = {
     strength: 2,
     intelligence: 15,
@@ -58,6 +76,7 @@ function App() {
     }
   }
 
+  // Tiers for difficulty scaling
   const tiers = [
     { levelRange: [1, 4],  dc: 14, tier: 1, xp: 25,   title: "the least of" },
     { levelRange: [5, 8],  dc: 16, tier: 2, xp: 250,  title: "a worthy of the" },
@@ -66,28 +85,9 @@ function App() {
     { levelRange: [17,20], dc: 21, tier: 5, xp: 2000, title: "the most epic of the" },
   ];
 
+  // Random Wild Feature from JSON
   const randomWildFeatureIndex = Math.floor(Math.random() * wildFeatures.wildFeature.length);
   const wildFeature = wildFeatures.wildFeature[randomWildFeatureIndex];
-
-  // Factions by terrain
-  const factionsByTerrain = useMemo(() => ({
-    arctic: [
-      "Suloise", "Northern Barbarians", "Wildthings", "Magma Dwellers",
-      "Pale Wyrms", "Goblinkin", "Frostmourne", "Feyfrost", "Hodir Ordning"
-    ],
-    desert: [
-      "Baklunish", "Rary-Bright Empire", "Old Sulm", "Tribal",
-      "Azak-Zil Demihumans", "Elemental Fire", "Desert Fauna"
-    ],
-  }), []);
-
-  // Update factions on terrain change
-  useEffect(() => {
-    if (terrain && factionsByTerrain[terrain]) {
-      setFactions(factionsByTerrain[terrain]);
-      setSelectedFaction('');
-    }
-  }, [terrain, factionsByTerrain]);
 
   /******************************************************
    * Generate Event
@@ -106,10 +106,23 @@ function App() {
     );
     const { dc, xp, title: tierTitle } = currentTier;
 
-    // 20% chance to pick a random faction instead of user selection
-    let faction = selectedFaction;
-    if (Math.random() < 0.2 && factions.length > 0) {
-      faction = factions[Math.floor(Math.random() * factions.length)];
+    // Determine final homeland (random if user selected "random")
+    let finalHomeland;
+    if (homeland === "random") {
+      // pick a random homeland from index 1..end so we skip "random" as a direct choice
+      const randomIndex = Math.floor(Math.random() * (homelandOptions.length - 1)) + 1;
+      finalHomeland = homelandOptions[randomIndex];
+    } else {
+      finalHomeland = homeland;
+    }
+
+    // Determine final arc (random if user selected "random")
+    let finalArc;
+    if (arc === "random") {
+      const randomIndex = Math.floor(Math.random() * (arcOptions.length - 1)) + 1;
+      finalArc = arcOptions[randomIndex];
+    } else {
+      finalArc = arc;
     }
 
     function generateEvent() {
@@ -144,7 +157,8 @@ function App() {
       if (randomCheckType === "Simple Skill Check") {
         eventOutput = (
           <div className="event-text">
-            Near <strong>{wildFeature.name}</strong> you meet <strong>{name}</strong>, {pronoun} is {tierTitle} {faction}.<br/>
+            In <strong>{finalHomeland}</strong>, near <strong>{wildFeature.name}</strong>, you encounter <strong>{name}</strong>.
+            {` ${pronoun.charAt(0).toUpperCase() + pronoun.slice(1)} is ${tierTitle} of the ${finalHomeland}. They set a quest in the ${finalArc} arc.`}<br/>
             Make a <strong>Simple Skill Check</strong> DC {dc} {randomSkill.skill} ({randomSkill.stat}). 
             Success provides <strong>{randomGainResource.name}</strong> {gainResourceDescription}.<br/>
             On failure you suffer <strong>{randomLossResource.name}</strong> {lossResourceDescription}.<br/>
@@ -155,7 +169,8 @@ function App() {
       } else if (randomCheckType === "Resource Swap") {
         eventOutput = (
           <div className="event-text">
-            Near <strong>{wildFeature.name}</strong> you meet <strong>{name}</strong>, {pronoun} is {tierTitle} {faction}.<br/>
+            In <strong>{finalHomeland}</strong>, near <strong>{wildFeature.name}</strong>, you encounter <strong>{name}</strong>.
+            {` ${pronoun.charAt(0).toUpperCase() + pronoun.slice(1)} is ${tierTitle} ${finalArc}.`}<br/>
             You strike a bargain for a <strong>Resource Swap</strong>, 
             make a Skill check DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}).<br/>
             Success provides <strong>{randomGainResource.name}</strong> {gainResourceDescription} and costs
@@ -169,7 +184,8 @@ function App() {
         // Skill Challenge
         eventOutput = (
           <div className="event-text">
-            Near <strong>{wildFeature.name}</strong> you meet <strong>{name}</strong>, {pronoun} is {tierTitle} {faction}.<br/>
+            In <strong>{finalHomeland}</strong>, near <strong>{wildFeature.name}</strong>, you encounter <strong>{name}</strong>.
+            {` ${pronoun.charAt(0).toUpperCase() + pronoun.slice(1)} is ${tierTitle} ${finalArc}.`}<br/>
             You face a <strong>Skill Challenge</strong> DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}).<br/>
             As a group you must achieve twice the number of successes as participants, 
             before you have failures equal to the number of participants.<br/>
@@ -193,7 +209,6 @@ function App() {
   const [npcOutput, setNpcOutput] = useState('');
   const [npcType, setNpcType] = useState("bastionLeaders");
 
-  // Generate NPC
   const handleGenerateNpc = () => {
     const { alignmentDisplay, alignmentFlavor, plane } = generateAlignment(npcType);
     const chosenTraits  = pickThreeTraits(alignmentFlavor);
@@ -305,6 +320,7 @@ function App() {
         continue;
       }
       if (numRandom > 0) {
+        // 50% chance to pick from this pair for the "random" slot
         if (Math.random() < 0.5) {
           finalTraits.push(Math.random() < 0.5 ? virtueSide : viceSide);
           numRandom--;
@@ -415,34 +431,34 @@ function App() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="terrainSelect">Terrain:</label>
+              <label htmlFor="homelandSelect">Homeland:</label>
               <select
-                id="terrainSelect"
-                value={terrain}
-                onChange={(e) => setTerrain(e.target.value)}
+                id="homelandSelect"
+                value={homeland}
+                onChange={(e) => setHomeland(e.target.value)}
               >
-                <option value="">Select terrain</option>
-                {terrains.map((t) => (
-                  <option key={t} value={t}>{t}</option>
+                {homelandOptions.map((option) => (
+                  <option key={option} value={option}>{option}</option>
                 ))}
               </select>
             </div>
 
             <div className="form-group">
-              <label htmlFor="factionSelect">Faction:</label>
+              <label htmlFor="arcSelect">Arc:</label>
               <select
-                id="factionSelect"
-                value={selectedFaction}
-                onChange={(e) => setSelectedFaction(e.target.value)}
+                id="arcSelect"
+                value={arc}
+                onChange={(e) => setArc(e.target.value)}
               >
-                <option value="">Select faction</option>
-                {factions.map((f) => (
-                  <option key={f} value={f}>{f}</option>
+                {arcOptions.map((option) => (
+                  <option key={option} value={option}>{option}</option>
                 ))}
               </select>
             </div>
 
-            <button type="submit" className="btn-generate">Generate Event</button>
+            <button type="submit" className="btn-generate">
+              Generate Event
+            </button>
           </form>
         </fieldset>
 
@@ -492,7 +508,6 @@ function App() {
             </label>
           </div>
 
-          {/* Separate button (in the same or separate <form>) */}
           <button type="button" onClick={handleGenerateNpc} className="btn-generate">
             Generate NPC
           </button>
