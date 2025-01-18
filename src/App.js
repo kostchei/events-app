@@ -12,7 +12,9 @@ import traitsJSON from './data/traits.json';
 import classesJSON from './data/classes.json';
 import tarotJSON from './data/tarot.json';
 
-import generateName from './assets/barbarianNames.js';
+// --- Name generator imports ---
+import barbarianNames from './assets/barbarianNames.js';
+import aquilonianNames from './assets/aquilonianNames.js';
 
 function App() {
   /******************************************************
@@ -42,11 +44,23 @@ function App() {
   const arcOptions = ["random", "Lolth", "Bloodwar", "Vecna"];
   const [arc, setArc] = useState("random");
 
-  // Barbarian name snippet
+  // Decide the name generator based on homeland
+  function getNameByHomeland(homeland, gender) {
+    switch (homeland) {
+      case "Aquilonia":
+        return aquilonianNames(gender);
+      case "Tengri":
+        return barbarianNames(gender); // or some other specialized generator if you prefer
+      default:
+        // fallback to barbarian names for everything else
+        return barbarianNames(gender);
+    }
+  }
+
+  // Will be used when generating the final text in handleSubmitEventForm
   const isMale = Math.random() < 0.55;
   const gender = isMale ? 'male' : 'female';
   const pronoun = isMale ? 'he' : 'she';
-  const name = generateName(gender);
 
   /******************************************************
    * "Skill Events" Data and Logic
@@ -109,7 +123,7 @@ function App() {
     // Determine final homeland (random if user selected "random")
     let finalHomeland;
     if (homeland === "random") {
-      // pick a random homeland from index 1..end so we skip "random" as a direct choice
+      // pick a random homeland from index 1..end so we skip "random" itself
       const randomIndex = Math.floor(Math.random() * (homelandOptions.length - 1)) + 1;
       finalHomeland = homelandOptions[randomIndex];
     } else {
@@ -124,6 +138,9 @@ function App() {
     } else {
       finalArc = arc;
     }
+
+    // Pick the correct name generator based on homeland, then generate a name
+    const name = getNameByHomeland(finalHomeland, gender);
 
     function generateEvent() {
       const randomStat = weightedStatList[Math.floor(Math.random() * weightedStatList.length)];

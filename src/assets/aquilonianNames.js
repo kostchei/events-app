@@ -1,94 +1,82 @@
 // aquilonianNames.js
+// ------------------------------
+// MALE NAME SYLLABLES
+// ------------------------------
+const maleStart = ["Ar", "Ca", "Mer", "Mor", "Per", "Lan", "Vi", "Ig", "Ka"];
+const maleMid   = ["bel", "cal", "gal", "mor", "tar", "uth", "win", "nor"];
+const maleEnd   = ["gon", "loc", "lon", "din", "der", "lan", "thur", "gaw"];
 
-// Example Arthurian style syllable sets — these are *completely made up* for demonstration.
-// Feel free to refine them based on research or your own preference.
-const nm1 = ["ar", "ca", "mer", "mor", "gor", "per", "el", "lan", "vi", "ig", "ka"]; 
-const nm2 = ["", "", "bel", "cal", "car", "gwy", "mer", "mor", "pen", "tar", "uth"];
-const nm3 = ["gon", "loc", "lon", "din", "der", "lan", "thur", "gaw", "vyr", "rod", "wyn"];
-const nm4 = ["s", "th", "n", "r", "m", "l", "d", "h"];
+// ------------------------------
+// FEMALE NAME SYLLABLES
+// ------------------------------
+const femaleStart = ["An", "Mor", "Gua", "Hel", "Is", "Ela", "Vi", "Gly", "Ca"];
+const femaleMid   = ["a", "e", "i", "o", "ia", "ora", "ella", "lyn", "thea"];
+const femaleEnd   = ["wen", "lin", "vyr", "min", "sir", "lott", "ryn", "dell"];
 
-// Slightly different arrays for female names
-const nm5 = ["", "", "morg", "gua", "anna", "hel", "is", "ela", "vio", "gly"];
-const nm6 = ["a", "e", "i", "o", "y", "ia", "io", "ora", "ella"];
-const nm7 = ["wen", "lin", "gause", "vyr", "min", "sir", "lott", "lyn", "nette", "thea"];
-const nm8 = ["", "", "n", "th", "l", "s", "ll", "m", "d"];
+// ------------------------------
+// ARTHURIAN NAMES
+// ------------------------------
+const arthurianMaleNames = [
+    "Lancelot", "Gawain", "Percival", "Galahad", "Kay", "Bedivere", "Tristan",
+    "Gaheris", "Gareth", "Lamorak", "Bors", "Lionel", "Agravain", "Palamedes",
+    "Safir", "Ector", "Calogrenant", "Uther", "Lot", "Mark", "Pellinore", "Ban",
+    "Caradoc", "Gorlois", "Uriens", "Merlin", "Yvain", "Sagramore", "Brunor",
+    "Dinadan", "Morien", "Pelleas", "Tor", "Meliant", "Brandiles", "Dagonet",
+    "Culhwch", "Goreu", "Cei", "Menw", "Geraint", "Owain", "Accolon",
+    "Louen", "Calard", "Tancred", "Bohemond", "Gaston", "Cassyon", "Reynard",
+    "Childebert", "Thierulf", "Adalhard", "Theoderic", "Arthur", "Segwarides",
+    "Claudas", "Helias", "Maugantius", "Pellam", "Drystan", "Esclabor"
+];
+
+const arthurianFemaleNames = [
+    "Guinevere", "Morgan", "Morgause", "Igraine", "Elaine", "Lynette",
+    "Lyonesse", "Isolde", "Nimue", "Viviane", "Enide", "Laudine", "Lunete",
+    "Blanchefleur", "Ragnell", "Clarissant", "Hellawes", "Sebile", "Angharad",
+    "Amalberga", "Bertilde", "Chlotilde", "Fastrada", "Ermengarde", "Richilde",
+    "Repanse", "Olwen", "Ganieda", "Blasine", "Ninianne", "Rotrud"
+];
 
 /**
- * Generates a random Arthurian-style name.
+ * Generates a name either using syllable combination or picking from Arthurian names
  * 
  * @param {"male"|"female"} type - Which type of name to generate.
  * @returns {string} The generated name (with the first letter capitalized).
  */
 function generateName(type) {
-    let nMs = "";
-    
-    // Male Name Generation
-    function nameMas() {
-        const rnd  = Math.floor(Math.random() * nm2.length);
-        const rnd2 = Math.floor(Math.random() * nm1.length);
-        const rnd3 = Math.floor(Math.random() * nm4.length);
-        let rnd4   = Math.floor(Math.random() * nm1.length);
-        const rnd5 = Math.floor(Math.random() * nm3.length);
-        let rnd6   = Math.floor(Math.random() * nm1.length);
-        const rnd7 = Math.floor(Math.random() * nm3.length);
-
-        // Example logic: ensure some of our random picks skip the first items 
-        // if we want to avoid too many leading vowels or empty strings, etc.
-        if (rnd < 3) {
-            while (rnd4 < 3) {
-                rnd4 = Math.floor(Math.random() * nm1.length);
+    // 50% chance to use either method
+    if (Math.random() < 0.5) {
+        // Use original syllable-based generation
+        let syllables = [];
+        const syllableCount = Math.random() < 0.5 ? 2 : 3;
+        
+        if (type === "male") {
+            syllables.push(randomChoice(maleStart));
+            if (syllableCount === 3) {
+                syllables.push(randomChoice(maleMid));
             }
-        }
-        if (rnd < 3 || rnd4 < 3) {
-            while (rnd6 < 3) {
-                rnd6 = Math.floor(Math.random() * nm1.length);
+            syllables.push(randomChoice(maleEnd));
+        } else {
+            syllables.push(randomChoice(femaleStart));
+            if (syllableCount === 3) {
+                syllables.push(randomChoice(femaleMid));
             }
+            syllables.push(randomChoice(femaleEnd));
         }
-
-        // Build the name by concatenating syllables
-        nMs = nm2[rnd] + nm1[rnd2] + nm3[rnd5] + nm1[rnd4] + nm3[rnd7] + nm1[rnd6] + nm4[rnd3];
+        
+        const name = syllables.join("");
+        return name.charAt(0).toUpperCase() + name.slice(1);
+    } else {
+        // Use Arthurian names
+        const nameList = type === "male" ? arthurianMaleNames : arthurianFemaleNames;
+        return randomChoice(nameList);
     }
+}
 
-    // Female Name Generation
-    function nameFem() {
-        let rnd   = Math.floor(Math.random() * nm5.length);
-        const rnd2 = Math.floor(Math.random() * nm6.length);
-        let rnd3   = Math.floor(Math.random() * nm8.length);
-        let rnd4   = Math.floor(Math.random() * nm6.length);
-        const rnd5 = Math.floor(Math.random() * nm7.length);
-        let rnd6   = Math.floor(Math.random() * nm6.length);
-        const rnd7 = Math.floor(Math.random() * nm7.length);
-
-        // Make sure some indices skip certain items if we want to reduce duplicates
-        if (rnd < 2) {
-            while (rnd < 2) {
-                rnd = Math.floor(Math.random() * nm5.length);
-            }
-        }
-        if (rnd2 < 2) {
-            while (rnd4 < 2) {
-                rnd4 = Math.floor(Math.random() * nm6.length);
-            }
-        }
-        if (rnd2 < 2 || rnd4 < 2) {
-            while (rnd6 < 2) {
-                rnd6 = Math.floor(Math.random() * nm6.length);
-            }
-        }
-
-        // Build the name by concatenating syllables
-        nMs = nm5[rnd] + nm6[rnd2] + nm7[rnd5] + nm6[rnd4] + nm7[rnd7] + nm6[rnd6] + nm8[rnd3];
-    }
-
-    if (type === "male") {
-        nameMas();
-    } else if (type === "female") {
-        nameFem();
-    }
-
-    // Capitalize the first letter of the name before returning it
-    nMs = nMs.charAt(0).toUpperCase() + nMs.slice(1);
-    return nMs;
+/**
+ * Utility: pick a random element from an array
+ */
+function randomChoice(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
 }
 
 export default generateName;
