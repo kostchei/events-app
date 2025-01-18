@@ -65,7 +65,7 @@ function App() {
   // Will be used when generating the final text in handleSubmitEventForm
   const isMale = Math.random() < 0.55;
   const gender = isMale ? 'male' : 'female';
-  const pronoun = isMale ? 'he' : 'she';
+  const pronoun = isMale ? 'he' : 'she';  
 
   /******************************************************
    * "Skill Events" Data and Logic
@@ -98,10 +98,10 @@ function App() {
   // Tiers for difficulty scaling
   const tiers = [
     { levelRange: [1, 4],  dc: 14, tier: 1, xp: 25,   title: "the least of" },
-    { levelRange: [5, 8],  dc: 16, tier: 2, xp: 250,  title: "a worthy of the" },
-    { levelRange: [9, 12], dc: 18, tier: 3, xp: 550,  title: " a leader among the" },
-    { levelRange: [13,16], dc: 20, tier: 4, xp: 1100, title: " a paragon of the" },
-    { levelRange: [17,20], dc: 21, tier: 5, xp: 2000, title: "the most epic of the" },
+    { levelRange: [5, 8],  dc: 16, tier: 2, xp: 250,  title: "a worthy" },
+    { levelRange: [9, 12], dc: 18, tier: 3, xp: 550,  title: "a leader among" },
+    { levelRange: [13,16], dc: 20, tier: 4, xp: 1100, title: "a paragon of" },
+    { levelRange: [17,20], dc: 21, tier: 5, xp: 2000, title: "the most epic of" },
   ];
 
   // Random Wild Feature from JSON
@@ -175,12 +175,27 @@ function App() {
       const successExp = xp;
       const failureExp = xp / 2;
 
+      /**
+       * Common text we want at the start for all event types
+       * e.g.
+       * 
+       * In Aquilonia, near a Monument, you encounter Laudine. She is a worthy Aquilonia. 
+       * She has a quest for the Lolth arc.
+       */
+      const introText = (
+        <>
+          In <strong>{finalHomeland}</strong>, near <strong>{wildFeature.name}</strong>, you encounter <strong>{name}</strong>.&nbsp;
+          {pronoun.charAt(0).toUpperCase() + pronoun.slice(1)} is {tierTitle} <strong>{finalHomeland}</strong>.&nbsp;
+          {pronoun.charAt(0).toUpperCase() + pronoun.slice(1)} has a quest for the <strong>{finalArc}</strong> arc.
+          <br/><br/>
+        </>
+      );
+
       let eventOutput;
       if (randomCheckType === "Simple Skill Check") {
         eventOutput = (
           <div className="event-text">
-            In <strong>{finalHomeland}</strong>, near <strong>{wildFeature.name}</strong>, you encounter <strong>{name}</strong>.
-            {` ${pronoun.charAt(0).toUpperCase() + pronoun.slice(1)} is ${tierTitle} of the ${finalHomeland}. They set a quest in the ${finalArc} arc.`}<br/>
+            {introText}
             Make a <strong>Simple Skill Check</strong> DC {dc} {randomSkill.skill} ({randomSkill.stat}). 
             Success provides <strong>{randomGainResource.name}</strong> {gainResourceDescription}.<br/>
             On failure you suffer <strong>{randomLossResource.name}</strong> {lossResourceDescription}.<br/>
@@ -191,8 +206,7 @@ function App() {
       } else if (randomCheckType === "Resource Swap") {
         eventOutput = (
           <div className="event-text">
-            In <strong>{finalHomeland}</strong>, near <strong>{wildFeature.name}</strong>, you encounter <strong>{name}</strong>.
-            {` ${pronoun.charAt(0).toUpperCase() + pronoun.slice(1)} is ${tierTitle} ${finalArc}.`}<br/>
+            {introText}
             You strike a bargain for a <strong>Resource Swap</strong>, 
             make a Skill check DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}).<br/>
             Success provides <strong>{randomGainResource.name}</strong> {gainResourceDescription} and costs
@@ -206,8 +220,7 @@ function App() {
         // Skill Challenge
         eventOutput = (
           <div className="event-text">
-            In <strong>{finalHomeland}</strong>, near <strong>{wildFeature.name}</strong>, you encounter <strong>{name}</strong>.
-            {` ${pronoun.charAt(0).toUpperCase() + pronoun.slice(1)} is ${tierTitle} ${finalArc}.`}<br/>
+            {introText}
             You face a <strong>Skill Challenge</strong> DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}).<br/>
             As a group you must achieve twice the number of successes as participants, 
             before you have failures equal to the number of participants.<br/>
