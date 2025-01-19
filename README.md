@@ -1,16 +1,5 @@
 # To Do
 
-## Clean up NPC output
-
-perhaps pick 1 relevant
-
-## Split functions
-
-Bastion leader
-
-Quest
-
-Enemy
 
 ### NPC Bastion Leader levels
 
@@ -24,3 +13,6 @@ How much coin etc
 
 2ndary objectives.
 
+### Feed to GPT
+
+in the app?
