@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 
-// JSON data (replace with correct paths)
+// JSON data (replace with the correct paths)
 import skills from './data/skills.json';
 import resources from './data/resources.json';
 import wildFeatures from './data/wildFeatures.json';
@@ -21,13 +21,11 @@ import lusitaniaNames from './assets/lusitaniaNames.js';
 
 function App() {
   /******************************************************
-   * State for the "Skill Events"
+   * State for "Skill Events"
    ******************************************************/
   const [level, setLevel] = useState(1);
   const [output, setOutput] = useState("");
 
-  // ---------- New Homeland State ------------
-  // First dropdown: user can choose "random" or pick from the list below
   const homelandOptions = [
     "random",
     "Aquilonia",
@@ -42,12 +40,10 @@ function App() {
   ];
   const [homeland, setHomeland] = useState("random");
 
-  // ---------- New Arc State ------------
-  // Second dropdown: user can choose "random" or pick from these arcs
   const arcOptions = ["random", "Lolth", "Bloodwar", "Vecna"];
   const [arc, setArc] = useState("random");
 
-  // Decide the name generator based on homeland
+  // Decide name generator based on homeland
   function getNameByHomeland(homeland, gender) {
     switch (homeland) {
       case "Aquilonia":
@@ -55,37 +51,32 @@ function App() {
       case "Tengri":
         return barbarianNames(gender);
       case "Cathay":
-        return orientalNames(gender); // Use oriental names for Cathay
       case "Nihon":
-        return orientalNames(gender); // Use oriental names for Nihon
+        return orientalNames(gender);
       case "Lusitania":
-        return lusitaniaNames(gender); // Use oriental names for Lusitania
+        return lusitaniaNames(gender);
       case "Q'haran":
-        return qharanNames(gender); // Use q'haran names for q'haran
+        return qharanNames(gender);
       default:
-        // fallback to barbarian names for everything else
         return barbarianNames(gender);
     }
   }
 
-  // Will be used when generating the final text in handleSubmitEventForm
+  // Gender for naming
   const isMale = Math.random() < 0.55;
   const gender = isMale ? 'male' : 'female';
-  const pronoun = isMale ? 'he' : 'she';  
+  const pronoun = isMale ? 'he' : 'she';
 
   /******************************************************
-   * "Skill Events" Data and Logic
+   * Skills & Tiers
    ******************************************************/
   const skillsByStat = skills.reduce((groups, skill) => {
     const stat = skill.stat.toLowerCase();
-    if (!groups[stat]) {
-      groups[stat] = [];
-    }
+    if (!groups[stat]) groups[stat] = [];
     groups[stat].push(skill);
     return groups;
   }, {});
 
-  // Weighted Stats
   const statWeights = {
     strength: 2,
     intelligence: 15,
@@ -101,7 +92,6 @@ function App() {
     }
   }
 
-  // Tiers for difficulty scaling
   const tiers = [
     { levelRange: [1, 4],  dc: 14, tier: 1, xp: 25,   title: "the least of" },
     { levelRange: [5, 8],  dc: 16, tier: 2, xp: 250,  title: "a worthy" },
@@ -110,47 +100,44 @@ function App() {
     { levelRange: [17,20], dc: 21, tier: 5, xp: 2000, title: "the most epic of" },
   ];
 
-  // Random Wild Feature from JSON
+  // Wild Feature
   const randomWildFeatureIndex = Math.floor(Math.random() * wildFeatures.wildFeature.length);
   const wildFeature = wildFeatures.wildFeature[randomWildFeatureIndex];
 
   /******************************************************
-   * Generate Event
+   * Generate Event Handler
    ******************************************************/
   const handleSubmitEventForm = (event) => {
     event.preventDefault();
 
-    // Random variation to the chosen level: -4..+4
     let variedLevel = parseInt(level, 10) + Math.floor(Math.random() * 9) - 4;
     if (variedLevel < 1) variedLevel = 1;
     if (variedLevel > 20) variedLevel = 20;
 
-    // Find the tier
     const currentTier = tiers.find(
       (t) => variedLevel >= t.levelRange[0] && variedLevel <= t.levelRange[1]
     );
     const { dc, xp, title: tierTitle } = currentTier;
 
-    // Determine final homeland (random if user selected "random")
+    // Final homeland
     let finalHomeland;
     if (homeland === "random") {
-      // pick a random homeland from index 1..end so we skip "random" itself
-      const randomIndex = Math.floor(Math.random() * (homelandOptions.length - 1)) + 1;
-      finalHomeland = homelandOptions[randomIndex];
+      const randIndex = Math.floor(Math.random() * (homelandOptions.length - 1)) + 1;
+      finalHomeland = homelandOptions[randIndex];
     } else {
       finalHomeland = homeland;
     }
 
-    // Determine final arc (random if user selected "random")
+    // Final arc
     let finalArc;
     if (arc === "random") {
-      const randomIndex = Math.floor(Math.random() * (arcOptions.length - 1)) + 1;
-      finalArc = arcOptions[randomIndex];
+      const randIndex = Math.floor(Math.random() * (arcOptions.length - 1)) + 1;
+      finalArc = arcOptions[randIndex];
     } else {
       finalArc = arc;
     }
 
-    // Pick the correct name generator based on homeland, then generate a name
+    // Name
     const name = getNameByHomeland(finalHomeland, gender);
 
     function generateEvent() {
@@ -165,29 +152,21 @@ function App() {
       const randomLossResource = resources.loss[Math.floor(Math.random() * resources.loss.length)];
       const randomLossResource2 = resources.loss[Math.floor(Math.random() * resources.loss.length)];
 
-      // Possibly show tier-based resource amounts
-      const gainResourceDescription = randomGainResource.tiers
+      const gainDesc = randomGainResource.tiers
         ? `${randomGainResource.description} (${randomGainResource.tiers.find(t => t.tier === currentTier.tier).value})`
         : randomGainResource.description;
 
-      const lossResourceDescription = randomLossResource.tiers
+      const lossDesc = randomLossResource.tiers
         ? `${randomLossResource.description} (${randomLossResource.tiers.find(t => t.tier === currentTier.tier).value})`
         : randomLossResource.description;
 
-      const lossResourceDescription2 = randomLossResource2.tiers
+      const lossDesc2 = randomLossResource2.tiers
         ? randomLossResource2.tiers.find(t => t.tier === currentTier.tier).value
         : randomLossResource2.description;
 
       const successExp = xp;
       const failureExp = xp / 2;
 
-      /**
-       * Common text we want at the start for all event types
-       * e.g.
-       * 
-       * In Aquilonia, near a Monument, you encounter Laudine. She is a worthy Aquilonia. 
-       * She has a quest for the Lolth arc.
-       */
       const introText = (
         <>
           In <strong>{finalHomeland}</strong>, near <strong>{wildFeature.name}</strong>, you encounter <strong>{name}</strong>.&nbsp;
@@ -203,8 +182,8 @@ function App() {
           <div className="event-text">
             {introText}
             Make a <strong>Simple Skill Check</strong> DC {dc} {randomSkill.skill} ({randomSkill.stat}). 
-            Success provides <strong>{randomGainResource.name}</strong> {gainResourceDescription}.<br/>
-            On failure you suffer <strong>{randomLossResource.name}</strong> {lossResourceDescription}.<br/>
+            Success provides <strong>{randomGainResource.name}</strong> {gainDesc}.<br/>
+            On failure you suffer <strong>{randomLossResource.name}</strong> {lossDesc}.<br/>
             Success grants each participant <strong>{successExp} XP</strong>, 
             failure grants <strong>{failureExp} XP</strong>.
           </div>
@@ -215,9 +194,10 @@ function App() {
             {introText}
             You strike a bargain for a <strong>Resource Swap</strong>, 
             make a Skill check DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}).<br/>
-            Success provides <strong>{randomGainResource.name}</strong> {gainResourceDescription} and costs
-            <strong> {randomLossResource.name}</strong> {lossResourceDescription}.<br/>
-            On failure you suffer an additional <strong>{randomLossResource2.name}</strong> {lossResourceDescription2}.<br/>
+            Success provides <strong>{randomGainResource.name}</strong> {gainDesc} and costs
+            &nbsp;<strong>{randomLossResource.name}</strong> {lossDesc}.<br/>
+            On failure you suffer an additional 
+            &nbsp;<strong>{randomLossResource2.name}</strong> {lossDesc2}.<br/>
             Success grants each participant <strong>{successExp} XP</strong>, 
             failure grants <strong>{failureExp} XP</strong>.
           </div>
@@ -228,10 +208,10 @@ function App() {
           <div className="event-text">
             {introText}
             You face a <strong>Skill Challenge</strong> DC {dc - 3} {randomSkill.skill} ({randomSkill.stat}).<br/>
-            As a group you must achieve twice the number of successes as participants, 
+            As a group you must achieve twice the number of successes as participants,
             before you have failures equal to the number of participants.<br/>
-            Success provides <strong>{randomGainResource.name}</strong> {gainResourceDescription}. 
-            On failure you suffer <strong>{randomLossResource.name}</strong> {lossResourceDescription}.<br/>
+            Success provides <strong>{randomGainResource.name}</strong> {gainDesc}.
+            On failure you suffer <strong>{randomLossResource.name}</strong> {lossDesc}.<br/>
             Success grants each participant <strong>{successExp} XP</strong>, 
             failure grants <strong>{failureExp} XP</strong>.
           </div>
@@ -245,29 +225,52 @@ function App() {
   };
 
   /******************************************************
-   * NPC Generation Logic
+   * NPC Generation
    ******************************************************/
   const [npcOutput, setNpcOutput] = useState('');
   const [npcType, setNpcType] = useState("bastionLeaders");
 
   const handleGenerateNpc = () => {
+    // Step 1: Get alignment info
     const { alignmentDisplay, alignmentFlavor, plane } = generateAlignment(npcType);
+
+    // Step 2: Get random traits, class, species
     const chosenTraits  = pickThreeTraits(alignmentFlavor);
     const chosenClass   = pickClass();
     const chosenSpecies = pickSpecies();
-    const chosenTarot   = randomFromArray(tarotJSON);
 
-    const result = {
-      npcType,
-      alignment: alignmentDisplay,
-      plane,
-      traits: chosenTraits,
-      class: chosenClass,
-      species: chosenSpecies,
-      tarot: chosenTarot
-    };
+    // Step 3: Pick a Tarot card
+    const chosenTarot = randomFromArray(tarotJSON);
+    let tarotTitle = "None";
+    let tarotOrientation = "";
+    let tarotPersonMeaning = "";
 
-    setNpcOutput(JSON.stringify(result, null, 2));
+    if (chosenTarot) {
+      tarotTitle = chosenTarot.title;
+
+      // 50/50 if it's Upright or Reversed
+      const isUpright = Math.random() < 0.5;
+      tarotOrientation = isUpright ? "Upright" : "Reversed";
+
+      // We only care about the "person" meaning for whichever orientation was chosen
+      tarotPersonMeaning = isUpright
+        ? chosenTarot.upright_meaning.person
+        : chosenTarot.reversed_meaning.person;
+    }
+
+    // Build a summary (no braces or quotes)
+    const npcSummary = `
+NPC Type: ${npcType}
+Alignment: ${alignmentDisplay}
+Plane: ${plane}
+Traits: ${chosenTraits.join(', ')}
+Class: ${chosenClass}
+Species: ${chosenSpecies}
+Tarot: ${tarotTitle} [${tarotOrientation}]
+Tarot (Person): ${tarotPersonMeaning}
+`.trim();
+
+    setNpcOutput(npcSummary);
   };
 
   /******************************************************
@@ -401,7 +404,7 @@ function App() {
     } else if (roll < 90) {
       return randomFromArray(classesJSON.knowledge);
     } else {
-      // sub-roll for the type of spellcaster
+      // sub-roll for spellcaster
       const subRoll = Math.random() * 100;
       if (subRoll < 30) {
         return randomFromArray(classesJSON.spellcasting.int);
@@ -557,6 +560,7 @@ function App() {
         {/* Display the generated NPC */}
         {npcOutput && (
           <article className="result-card">
+            {/* We use <pre> so the line breaks in the string remain */}
             <pre>{npcOutput}</pre>
           </article>
         )}
