@@ -16,6 +16,8 @@ import tarotJSON from './data/tarot.json';
 import barbarianNames from './assets/barbarianNames.js';
 import aquilonianNames from './assets/aquilonianNames.js';
 import orientalNames from './assets/orientalNames.js';
+import qharanNames from './assets/qharanNames.js';
+import lusitaniaNames from './assets/lusitaniaNames.js';
 
 function App() {
   /******************************************************
@@ -56,6 +58,10 @@ function App() {
         return orientalNames(gender); // Use oriental names for Cathay
       case "Nihon":
         return orientalNames(gender); // Use oriental names for Nihon
+      case "Lusitania":
+        return lusitaniaNames(gender); // Use oriental names for Lusitania
+      case "Q'haran":
+        return qharanNames(gender); // Use q'haran names for q'haran
       default:
         // fallback to barbarian names for everything else
         return barbarianNames(gender);
