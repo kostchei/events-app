@@ -19,6 +19,9 @@ import orientalNames from './assets/orientalNames.js';
 import qharanNames from './assets/qharanNames.js';
 import lusitaniaNames from './assets/lusitaniaNames.js';
 
+//Level generator
+import { randomLevel, probabilisticLevel, diceLevel } from './assets/levelGen.js';
+
 function App() {
   /******************************************************
    * State for "Skill Events"
