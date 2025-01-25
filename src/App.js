@@ -20,7 +20,7 @@ import qharanNames from './assets/qharanNames.js';
 import lusitaniaNames from './assets/lusitaniaNames.js';
 
 //Level generator
-import { randomLevel, probabilisticLevel, diceLevel } from './assets/levelGen.js';
+import { generateNpcLevel } from './assets/levelGen.js';
 
 function App() {
   /******************************************************
@@ -242,6 +242,8 @@ function App() {
     const chosenClass   = pickClass();
     const chosenSpecies = pickSpecies();
 
+    const npcLevel = generateNpcLevel(npcType, parseInt(level, 10));
+
     // Step 3: Pick a Tarot card
     const chosenTarot = randomFromArray(tarotJSON);
     let tarotTitle = "None";
@@ -264,6 +266,7 @@ function App() {
     // Build a summary (no braces or quotes)
     const npcSummary = `
 NPC Type: ${npcType}
+Level: ${npcLevel}
 Alignment: ${alignmentDisplay}
 Plane: ${plane}
 Traits: ${chosenTraits.join(', ')}

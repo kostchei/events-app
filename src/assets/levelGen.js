@@ -23,10 +23,53 @@ export function probabilisticLevel() {
     return 1; // Fallback to level 1
 }
 
-// Method 3: Level based on 2d4 + 1d6 + 2 (range: 5-16)
+// Method 3: Level based on 2d4 + 1d6 + 2 (range: 5–16)
 export function diceLevel() {
     const roll2d4 = () => Math.floor(Math.random() * 4) + 1 + Math.floor(Math.random() * 4) + 1;
     const roll1d6 = () => Math.floor(Math.random() * 6) + 1;
 
     return roll2d4() + roll1d6() + 2;
+}
+
+// Method 4: Level based on party level
+export function levelBasedOnParty(partyLevel) {
+    if (partyLevel >= 14) return 20;
+
+    const levelMapping = {
+        1: 4, 2: 5, 3: 6, 4: 8, 5: 9, 6: 10, 7: 12,
+        8: 13, 9: 14, 10: 15, 11: 17, 12: 18, 13: 19, 14: 21,
+    };
+
+    return levelMapping[partyLevel] || 1;
+}
+
+// Main generator function for NPC level
+export function generateNpcLevel(npcType, partyLevel) {
+    const roll = Math.random() * 100;
+
+    if (npcType === "bastionLeaders") {
+        if (roll < 80) {
+            return diceLevel(); // 80% use diceLevel
+        } else if (roll < 90) {
+            return levelBasedOnParty(partyLevel); // 10% use party-based levels
+        } else {
+            return randomLevel(); // 10% are random
+        }
+    } else if (npcType === "questGiversFriendly") {
+        if (roll < 80) {
+            return probabilisticLevel(); // 80% use probabilisticLevel
+        } else if (roll < 90) {
+            return randomLevel(); // 10% are random
+        } else {
+            return levelBasedOnParty(partyLevel); // 10% use party-based levels
+        }
+    } else if (npcType === "enemiesEncounters") {
+        if (roll < 90) {
+            return levelBasedOnParty(partyLevel); // 90% use party-based levels
+        } else {
+            return randomLevel(); // 10% are random
+        }
+    }
+
+    return 1; // Default fallback
 }
